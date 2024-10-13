@@ -23,7 +23,7 @@ jobs:
       - name: Get current date
         id: date
         run: |
-          DATE=$(date +'%Y-%m-%d')
+          DATE=$(date +'%Y.%m.%d')
           echo "DATE=$DATE" >> $GITHUB_ENV
 
 # build and push the image to ghcr.io
