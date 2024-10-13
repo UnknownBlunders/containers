@@ -39,6 +39,8 @@ RUN mkdir -p /config \
 COPY --chown=steam:steam init.sh /
 COPY --chown=steam:steam run.sh /home/steam/
 
+RUN chmod +x /init.sh /home/steam/run.sh
+
 WORKDIR /config
 
 ARG VERSION="DEV"

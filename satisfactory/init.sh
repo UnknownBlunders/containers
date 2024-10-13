@@ -103,8 +103,8 @@ mkdir -p \
     "${GAMECONFIGDIR}/Config/LinuxServer" \
     "${GAMECONFIGDIR}/Logs" \
     "${GAMESAVESDIR}/server" \
-    # /home/steam/.steam/root \
-    # /home/steam/.steam/steam \
+    /home/steam/.steam/root \
+    /home/steam/.steam/steam \
     || exit 1
 
 echo "Satisfactory logs can be found in /config/gamefiles/FactoryGame/Saved/Logs" > /config/logs/satisfactory-path.txt
