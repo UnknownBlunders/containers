@@ -28,6 +28,7 @@ jobs:
 
 # build and push the image to ghcr.io
       - name: Build image
+        working-directory: ./satisfactory
         run: docker build . --tag $IMAGE_NAME:latest --tag $IMAGE_NAME:${{github.sha}} --tag $IMAGE_NAME:${{ env.DATE }}
 
       - name: Log in to registry
