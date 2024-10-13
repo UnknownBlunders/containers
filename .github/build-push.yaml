@@ -1,0 +1,37 @@
+name: build and push satisfactory to ghcr
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+
+env:
+  IMAGE_NAME: ghcr.io/unknownblunders/satisfactory
+  PACKAGE_NAME: satisfactory
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get current date
+        id: date
+        run: |
+          $DATE=& Get-Date -format yyyy-MM-dd
+          echo "DATE=$DATE" >> $env:GITHUB_ENV
+
+# build and push the image to ghcr.io
+      - name: Build image
+        run: docker build . --tag $IMAGE_NAME:latest --tag $IMAGE_NAME:${{github.sha}} --tag $IMAGE_NAME:${{ env.DATE }}
+
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+
+      - name: Push image
+        run: docker push $IMAGE_NAME --all-tags
